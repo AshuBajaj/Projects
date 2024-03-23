@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 
+  Sample template to create EC2 in free-tier account.
+  Linux al2023-ami-2023.4.20240319.1-kernel-6.1-x86_64 in Availablity zone us-east-1a
+  You will be billed for the AWS resources used ,
+  if you create a stack from this template.
+  After deleting stack, remember to delete the associated S3 bucket.
+    
+Resources:
+  
+  #  EC2 instance of type t2.micro  
+  CloudFormedEC21A:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0c101f26f147fa7fd
+      AvailabilityZone: us-east-1a
+      Tags: 
+       - Key: Name
+         Value: CloudFormed-ec2-1A
+       - Key: Application
+         Value:
+          Ref: "AWS::StackName"   
+       
+
+# output important values for easy viewing in cloudformation dashboard
+Outputs:
+  InstanceId1A:
+    Description: InstanceId of the first EC2 instance
+    Value: !Ref CloudFormedEC21A
+  
+ 
